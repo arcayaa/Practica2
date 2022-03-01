@@ -205,7 +205,40 @@ ggsave("Ejercicio2.pdf")
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio3.pdf``.
 
 ```{r Solucion ejercicio 3}
+#Cargamos le fichero, sienrdo conscientes de que no podemos usar rutas locales
+load("data/iris_tidy.Rdata")
 
+#Observamos qeu variables tiene el dataset. Tiene 4 variables: species, part, measure y value
+v <- str(iris.tidy)
+v
+
+#Creamos el grafico iris.grafico1
+iris.grafico1 <- ggplot(data = iris.tidy, aes(x = Species, y = Value))
+iris.grafico1
+
+#Construimos el grafico de dispersion
+iris.grafico12 <- iris.grafico1 + geom_point()
+iris.grafico12
+
+#Modificamos para visualizar la variable categorica 'Part'
+iris.grafico2 <- ggplot(data = iris.tidy) + geom_point(mapping = aes(x = Species, y = Value, color = Part))
+iris.grafico2
+
+#Introducimos el valor de la variable 'Measure'
+iris.grafico3 <- iris.grafico2 + facet_grid(.~Measure)
+iris.grafico3
+
+iris.grafico4 <- iris.grafico2 + facet_grid(Measure~ .)
+iris.grafico4
+#La disposicion por columnas permite comparar mejor los valores de las variables
+
+#Cambiamos geom_point por geom_jitter
+iris.grafico5 <- ggplot(data = iris.tidy) + geom_jitter(mapping = aes(x = Species, y = Value, color = Part)) + facet_grid(.~Measure)
+iris.grafico5
+#Observamos que la disposicion de los cursos estan mas dispersas y se puede ver mejor
+
+#Almacenamos el grafico resultante en formato pdf
+ggsave("Ejercicio3.pdf")
 ```
 
 ## Gráficos de línea con **ggplot2**

@@ -134,6 +134,28 @@ p2
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio1.pdf``.
 
 ```{r Solucion ejercicio 1}
+#Cargamos el fichero, siendo conscientes de que no podemos utilizar rutas locales
+load("data/weatherAUS.RData")
+
+#Creamos el grafico1
+grafico1 <- ggplot(data = ds, aes(x = MinTemp, y = MaxTemp))
+grafico1
+
+#Para construir un grafico de dispersion vamos a utilizar "geom_points"
+grafico1.1 <- grafico1 + geom_point()
+grafico1.1
+
+#Creamos el grafico2
+grafico2 <- ggplot(data = ds) + geom_point(mapping = aes(x = MinTemp, y = MaxTemp, color = RainTomorrow))
+grafico2
+
+#Añadimos un titulo y lo guardamos en grafico3
+grafico3 <- grafico2 + ggtitle("Probabilidad de lluvia en funcion de la temperatura")
+grafico3
+
+#Almacenamos el grafico resultante en formato pdf
+ggsave("Ejercicio1.pdf")
+
 
 ```
 

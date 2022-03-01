@@ -375,7 +375,24 @@ Añadir barras de error a un gráfico de línea.
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio5.pdf``.
 
 ```{r Solucion ejercicio 5}
+#Cargamos el fichero, siendo conscientes de que no podemos utilizar rutal locales y examinamos sus variables
+load("data/Experimento.Rdata")
+str(Experimento)
 
+#Representamos un grafico de puntos
+grafico1 <- ggplot(data = Experimento, aes(x = Dosis, y = Altura, shape = Complemento, linetype = Complemento)) + geom_point() + geom_line()
+grafico1
+
+#Añadimos a este grafico las barras de error
+grafico2 <- grafico1 + geom_errorbar(aes(ymin = Altura-Error_Altura, ymax = Altura+Error_Altura), width = .1, position = position_dodge(0.05))
+grafico2
+
+#Modificamos el grafico anterior
+grafico3 <- ggplot(data = Experimento, aes(x = Dosis, y = Altura, colour = Complemento, group = Complemento)) + geom_point(aes(shape = Complemento)) + geom_line(aes(linetype = Complemento)) + geom_errorbar(aes(ymin = Altura-Error_Altura, ymax = Altura+Error_Altura), width = .1, position = position_dodge(0.05)) + theme_classic() + scale_color_brewer(palette = "Reds")
+grafico3
+
+#Almacenamos el grafico resultante en formato pdf
+ggsave("Ejercicio5.pdf")
 ```
 
 ## Gráficos de boxplot con **ggplot2**

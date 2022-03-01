@@ -312,7 +312,29 @@ ggplot(data=Dosis.Medicina2, aes(x=Dosis, y=Efectividad, group=Complemento)) +
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio4.pdf``.
 
 ```{r Solucion ejercicio 4}
+#Cargamos el fichero, siendo conscientes de que no podemos utilizar rutal locales y examinamos sus variables
+load("data/Ejercicio4_Data.Rdata")
+str(DatosEjer4)
 
+#Representamos un grafico de puntos
+grafico1 <- ggplot(data = DatosEjer4, aes(x = Fecha, y = Ventas, color = Fabricante)) + geom_point()
+grafico1
+#No es valido, ya que falta la union entre los puntos
+
+#Representamos en grafico de puntos, con la linea que los une
+grafico2 <- grafico1 + geom_line()
+grafico2
+
+#Modificamos el grafico anterior
+grafico3 <- ggplot(data = DatosEjer4, aes(x = Fecha, y = Ventas, color = Fabricante, linetype = Fabricante)) + geom_point() + geom_line()
+grafico3
+
+#Añadimos el titulo al grafico
+grafico4 <- grafico3 + ggtitle("Ventas mensuales de diferentes compañías tecnológicas")
+grafico4
+
+#Almacenamos el grafico resultante en formato pdf
+ggsave("Ejercicio4.pdf")
 ```
 
 ## Barras de error con **ggplot2**

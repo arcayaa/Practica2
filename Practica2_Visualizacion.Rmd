@@ -168,6 +168,28 @@ ggsave("Ejercicio1.pdf")
 * Almacena en formato **pdf** el gráfico resultante en un fichero denominado ``Ejercicio2.pdf``.
 
 ```{r Solucion ejercicio 2}
+#Creamos el grafico de dispersion, grafico1
+grafico1 <- ggplot(data = ds, aes(x = Temp9am, y = Pressure9am))
+grafico1
+
+#Incluimos la informacion de la variable 'RainToday'
+grafico2 <- grafico1 + geom_point()
+grafico2
+
+#Incluimos ahora el color y obsevamos como se observa mejor la informacion de la variable 'RainToday'
+grafico3 <- ggplot(data = ds) + geom_point(mapping = aes( x = Temp9am, y = Pressure9am, shape = RainToday))
+grafico3
+
+grafico4 <- ggplot(data = ds) + geom_point(mapping = aes( x = Temp9am, y = Pressure9am, color = RainToday))
+grafico4
+#Vemos claramente que la informacion de la variable 'RainToday' se observa mejor con la representacion del color
+
+#Incluimos el titulo
+grafico5 <- grafico4 + ggtitle("Probabilidad de lluvia en funcion de la presion y tª")
+grafico5
+
+#Almacenamos el grafico resultante en formato pdf
+ggsave("Ejercicio2.pdf")
 
 ```
 
